@@ -123,57 +123,107 @@ export default function Home() {
   };
 
   return (
-    <div style={{ height: '100vh', background: '#000000' }}>
-      <Canvas camera={{ position: [0, 0, 8], fov: 60 }}>
-        <color attach="background" args={['#000000']} />
-        <Stars
-          radius={100}
-          depth={50}
-          count={5000}
-          factor={4}
-          saturation={0}
-          fade
-          speed={1}
-        />
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[5, 5, 5]} intensity={1} />
-        <Suspense fallback={null}>
-          <Model />
-          <OrbitingText
-            radius={3}
-            speed={0.3}
-            phase={0}
-            text="Projects"
-            isSelected={selectedText === "Projects"}
-            onClick={() => handleTextClick("Projects")}
+    <main className="min-h-screen bg-black">
+      {/* 3D Scene Section */}
+      <div style={{ height: '100vh' }}>
+        <Canvas camera={{ position: [0, 0, 8], fov: 60 }}>
+          <color attach="background" args={['#000000']} />
+          <Stars
+            radius={100}
+            depth={50}
+            count={5000}
+            factor={4}
+            saturation={0}
+            fade
+            speed={1}
           />
-          <OrbitingText
-            radius={3}
-            speed={0.3}
-            phase={Math.PI / 2}
-            text="Contact"
-            isSelected={selectedText === "Contact"}
-            onClick={() => handleTextClick("Contact")}
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[5, 5, 5]} intensity={1} />
+          <Suspense fallback={null}>
+            <Model />
+            <OrbitingText
+              radius={3}
+              speed={0.3}
+              phase={0}
+              text="Projects"
+              isSelected={selectedText === "Projects"}
+              onClick={() => handleTextClick("Projects")}
+            />
+            <OrbitingText
+              radius={3}
+              speed={0.3}
+              phase={Math.PI / 2}
+              text="Contact"
+              isSelected={selectedText === "Contact"}
+              onClick={() => handleTextClick("Contact")}
+            />
+            <OrbitingText
+              radius={3}
+              speed={0.3}
+              phase={Math.PI}
+              text="Experience"
+              isSelected={selectedText === "Experience"}
+              onClick={() => handleTextClick("Experience")}
+            />
+            <OrbitingText
+              radius={3}
+              speed={0.3}
+              phase={3 * Math.PI / 2}
+              text="About Me"
+              isSelected={selectedText === "About Me"}
+              onClick={() => handleTextClick("About Me")}
+            />
+          </Suspense>
+          <OrbitControls
+            enableZoom={false}
+            enablePan={false}
+            enableRotate={false}
           />
-          <OrbitingText
-            radius={3}
-            speed={0.3}
-            phase={Math.PI}
-            text="Experience"
-            isSelected={selectedText === "Experience"}
-            onClick={() => handleTextClick("Experience")}
-          />
-          <OrbitingText
-            radius={3}
-            speed={0.3}
-            phase={3 * Math.PI / 2}
-            text="About Me"
-            isSelected={selectedText === "About Me"}
-            onClick={() => handleTextClick("About Me")}
-          />
-        </Suspense>
-        <OrbitControls enableZoom={true} />
-      </Canvas>
-    </div>
+        </Canvas>
+      </div>
+
+      {/* Content Sections */}
+      <div className="bg-black text-white">
+        {/* Projects Section */}
+        <section
+          id="projects"
+          className={`min-h-screen p-8 transition-opacity duration-500 ${selectedText === "Projects" ? "opacity-100" : "opacity-0 hidden"
+            }`}
+        >
+          <h2 className="text-4xl font-bold mb-6">Projects</h2>
+          <p>Your projects content here...</p>
+        </section>
+
+        {/* Contact Section */}
+        <section
+          id="contact"
+          className={`min-h-screen p-8 transition-opacity duration-500 ${selectedText === "Contact" ? "opacity-100" : "opacity-0 hidden"
+            }`}
+        >
+          <h2 className="text-4xl font-bold mb-6">Contact</h2>
+          <p>Your contact information here...</p>
+        </section>
+
+        {/* Experience Section */}
+        <section
+          id="experience"
+          className={`min-h-screen p-8 transition-opacity duration-500 ${selectedText === "Experience" ? "opacity-100" : "opacity-0 hidden"
+            }`}
+        >
+          <h2 className="text-4xl font-bold mb-6">Experience</h2>
+          <p>Your experience content here...</p>
+        </section>
+
+        {/* About Me Section */}
+        <section
+          id="about"
+          className={`min-h-screen p-8 transition-opacity duration-500 ${selectedText === "About Me" ? "opacity-100" : "opacity-0 hidden"
+            }`}
+        >
+          <h2 className="text-4xl font-bold mb-6">About Me</h2>
+          <p>Your about me content here...</p>
+        </section>
+      </div>
+    </main>
   );
 }
